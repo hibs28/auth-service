@@ -1,6 +1,13 @@
 package com.asianwear.auth_service.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,8 +23,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "users")
 public class User {
-
-    @GeneratedValue()
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID userId;
     private String firstName;
     private String lastName;
@@ -28,4 +35,5 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private boolean enabled = true;
 }
