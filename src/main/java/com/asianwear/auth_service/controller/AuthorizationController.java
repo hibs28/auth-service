@@ -1,21 +1,25 @@
 package com.asianwear.auth_service.controller;
 
 import com.asianwear.auth_service.dto.RegisterRequest;
+import com.asianwear.auth_service.service.AddressService;
 import com.asianwear.auth_service.service.AuthService;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/auth")
-@RequiredArgsConstructor
 public class AuthorizationController {
+    private AuthService authService;
+    private AddressService addressService;
 
-    private final AuthService authService;
-
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterRequest request) {
         return ResponseEntity.ok(authService.register(request));
     }
 
